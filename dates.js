@@ -1,71 +1,82 @@
-months = ["Gener","Febrer","Març","Abril","Maig","Juny","Juliol","Agost","Setembre","Octubre","Nobembre","Dessembre"];
-const monthsMax = [31,28,31,30,31,30,31,31,30,31,30,31];
+const months = ["Gener", "Febrer", "Març", "Abril", "Maig", "Juny", "Juliol", "Agost", "Setembre", "Octubre", "Nobembre", "Dessembre"];
+const monthsMax = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 var w = false;
-var words = ["Languages","Click the button!","Idiomes","Clica el boto!"] 
-const dates = [];
+var dates = [];
+var words = ["Languages", "Click the button!", "Idiomes", "Clica el boto!"]
+var weekdays = ["Dilluns", "Dimarts", "Dimecres", "Dijous", "Divendres", "Dissabte", "Diumenje"];
+var weekday = 0;
+var unorderedates = [];
+var temp = "";
 
 var day = 0;
 var month = 0;
-var date = "";
+var date = new String("");
 
 var showFold = false;
 
 document.getElementById("printdates").innerHTML = words[3];
 document.getElementById("languagediv").hidden = true;
 
-function cat(){
+function cat() {
     w = false;
+    weekdays = ["Dilluns", "Dimarts", "Dimecres", "Dijous", "Divendres", "Dissabte", "Diumenje"];
     document.getElementById("printdates").innerHTML = words[3];
     document.getElementById("fold").innerHTML = words[2];
-    months = ["Gener","Febrer","Març","Abril","Maig","Juny","Juliol","Agost","Setembre","Octubre","Nobembre","Dessembre"];
+    months = ["Gener", "Febrer", "Març", "Abril", "Maig", "Juny", "Juliol", "Agost", "Setembre", "Octubre", "Nobembre", "Dessembre"];
     document.getElementById("languagediv").hidden = true;
     var showFold = false;
 
 }
-function eng(){
+function eng() {
     w = true;
+    weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
     document.getElementById("printdates").innerHTML = words[1];
     document.getElementById("fold").innerHTML = words[0];
-    months = ["January","February","March","April","May","June",
-    "July","Agust","Setember","October","Nobember","December"];
+    months = ["January", "February", "March", "April", "May", "June",
+        "July", "Agust", "Setember", "October", "Nobember", "December"];
     document.getElementById("languagediv").hidden = true;
     var showFold = false;
 
 }
-function language(){
+function language() {
     console.log(showFold);
-    if(showFold == false){
+    if (showFold == false) {
         showFold = true;
         document.getElementById("languagediv").hidden = false;
-    }else{
+    } else {
         showFold = false;
         document.getElementById("languagediv").hidden = true;
     }
 }
 
-function gendates(){
+function gendates() {
+    dates = [];
     for (var i = 0; i < 5; i++) {
         month = Math.floor(Math.random() * 12);
         day = Math.floor(Math.random() * 31 + 1);
-        while(day > monthsMax[month]){
+        weekday = Math.floor(Math.random() * 7);
+
+        while (day > monthsMax[month]) {
             day = Math.floor(Math.random() * 31 + 1);
         }
-        if(!w){
-        date = day + " de " + months[month] + " del " + new Date().getFullYear();
-        }else{
-        date = months[month] + " " + day + " of " + new Date().getFullYear();
+        if (!w) {
+            date = weekdays[weekday] + " " + day + " de " + months[month] + " del " + new Date().getFullYear();
+        } else {
+            date = weekdays[weekday] + " the " + day + "th of " + months[month] + " of " + new Date().getFullYear();
 
         }
-        dates[i] = date;
-        
+        dates.push(new String(date));
+
+
     }
+
     printdates();
 }
 
-function printdates(){
+function printdates() {
     document.getElementById("printdates").innerHTML = "";
     for (let i = 0; i < 5; i++) {
-        document.getElementById("printdates").innerHTML += dates[i]; 
+        document.getElementById("printdates").innerHTML += dates[i];
         document.getElementById("printdates").append(document.createElement("br"));
     }
 }

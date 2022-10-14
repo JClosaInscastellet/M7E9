@@ -1,4 +1,4 @@
-const months = ["Gener", "Febrer", "Març", "Abril", "Maig", "Juny", "Juliol", "Agost", "Setembre", "Octubre", "Nobembre", "Dessembre"];
+var months = ["Gener", "Febrer", "Març", "Abril", "Maig", "Juny", "Juliol", "Agost", "Setembre", "Octubre", "Nobembre", "Dessembre"];
 const monthsMax = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 var w = false;
 var dates = [];
@@ -68,6 +68,32 @@ function gendates() {
         dates.push(new String(date));
 
 
+    }
+
+    /** recorre la array */
+    let tempMonth = 1;
+    let beforeTempMonth = 1;
+    for (let j = 0; j < dates.length; j++) {
+        for (let i = 1; i < dates.length; i++) {
+            // comprovar si l'anterior es mes gran que l'actual, si es mes gran
+            // retorna true, sino false
+            if(!w){
+                
+            }else{
+                beforeTempMonth = dates[i - 1].split(' ')[4];
+                tempMonth = dates[i].split(' ')[4];
+            }
+            if (months.indexOf(beforeTempMonth) < months.indexOf(tempMonth)) {
+                    console.log(false);
+
+                } else {
+                    console.log(true);
+                    temp = dates[i];
+                    dates[i] = dates[i - 1];
+                    dates[i - 1] = temp;
+                }
+
+        }
     }
 
     printdates();
